@@ -1,0 +1,463 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Coding School for Kids in Lagos Nigeria | Coding Classes for Children | Virtuakids</title>
+    <meta name="description" content="#1 Coding school for kids in Lagos, Nigeria. Learn coding, programming, web development, robotics & graphics design. Best coding classes for children ages 6-18. Enroll today!">
+    <meta name="keywords" content="coding school for kids Lagos, coding classes for children Nigeria, best coding school Lagos, programming classes for kids, robotics classes Lagos, web development for kids, coding academy Nigeria, tech school for children Lagos, STEM education Nigeria, kids coding bootcamp, learn coding for kids Lagos, children programming school">
+    <link rel="icon" type="image/svg+xml" href="{% static 'imgs/Favicon.svg' %}">
+    <link rel="canonical" href="https://virtuakids.ng/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(25deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(25deg);
+            }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float-no-rotate {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        .animate-float-image {
+            animation: float-no-rotate 4s ease-in-out infinite;
+        }
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+            }
+        }
+
+        .animate-fade-in-down {
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 1s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.3s; }
+        .stagger-3 { animation-delay: 0.5s; }
+
+        /* Gradient background */
+        .hero-gradient {
+            background: linear-gradient(45deg, #1a1f3a 0%, #127054 80%);
+        }
+
+        /* Geometric shapes */
+        .geometric-diamond {
+            border: 2px solid rgba(16, 185, 129, 0.4);
+            transform: rotate(25deg);
+        }
+
+        /* Hover effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Partners carousel */
+        @keyframes partner-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .partner-marquee {
+            animation: partner-scroll 25s linear infinite;
+        }
+
+        @keyframes water-ripple {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7), 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0), 0 0 0 20px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0), 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .water-effect {
+            animation: water-ripple 1.5s infinite;
+        }
+
+        @keyframes spin-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+            50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
+        }
+
+        @keyframes fade-out {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #1a1f3a 0%, #0f4d3a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loader.hide {
+            animation: fade-out 0.5s forwards;
+        }
+
+        .loader img {
+            width: 120px;
+            height: 120px;
+            animation: spin-pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Loader -->
+    <div id="loader" class="loader">
+        <img src="{% static 'imgs/Favicon.svg' %}" alt="Loading...">
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hide');
+            }, 1000);
+        });
+    </script>
+    <div x-data="{ menuOpen: false }">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo updated to Virtuakids -->
+                    <div class="flex items-center gap-3 animate-fade-in-down stagger-1">
+                        <img src="{% static 'imgs/Logomark.svg' %}" alt="Virtuakids logo" class="h-10 w-auto">
+                    </div>
+
+                    <!-- Navigation updated with Virtuakids menu items -->
+                    <nav class="hidden md:flex items-center gap-8">
+                        <a href="#" class="text-gray-700 hover:text-green-500 transition animate-fade-in-down stagger-1">Home</a>
+                        <a href="/about/" class="text-gray-700 hover:text-green-500 transition animate-fade-in-down stagger-2">About Us</a>
+                        <a href="/programs/" class="text-gray-700 hover:text-green-500 transition animate-fade-in-down stagger-2">Courses</a>
+                        <a href="/partnership/" class="text-gray-700 hover:text-green-500 transition animate-fade-in-down stagger-2">Partners</a>
+                        <a href="/contact/" class="text-gray-700 hover:text-green-500 transition animate-fade-in-down stagger-3">Contact Us</a>
+                    </nav>
+
+                    <!-- CTA Buttons -->
+                    <div class="hidden md:flex items-center gap-4 animate-fade-in-down stagger-3">
+                        <a href="/partnership/" class="px-6 py-2 bg-green-500 text-black rounded-lg hover:bg-green-400 transition font-semibold water-effect">
+                            Get Started
+                        </a>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <button @click="menuOpen = !menuOpen" class="md:hidden text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <nav x-show="menuOpen" class="md:hidden pb-4 border-t border-gray-200">
+                    <a href="#" class="block py-2 text-gray-700 hover:text-green-500">Home</a>
+                    <a href="/about/" class="block py-2 text-gray-700 hover:text-green-500">About Us</a>
+                    <a href="/programs/" class="block py-2 text-gray-700 hover:text-green-500">Courses</a>
+                    <a href="/partnership/" class="block py-2 text-gray-700 hover:text-green-500">Partners</a>
+                    <a href="/contact/" class="block py-2 text-gray-700 hover:text-green-500">Contact Us</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero section redesigned for Virtuakids -->
+        <section class="hero-gradient min-h-screen flex items-center justify-center overflow-hidden relative">
+            <!-- Hero side illustration -->
+            <img src="{% static 'imgs/Side Artcon.svg' %}" alt="Kids learning digital skills" class="hidden lg:block absolute right-0 top-0 h-full w-auto animate-float-image">
+
+            <!-- Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-20 w-full">
+                <div class="flex-2 z-10">
+                    <!-- Main Heading -->
+                    <h1 class="text-4xl md:text-6xl lg:text-8xl font-bold text-green-500 mb-6 leading-tight animate-fade-in-down stagger-1">
+                        Best Coding School<br>
+                        for Kids in<br>
+                        Lagos Nigeria
+                    </h1>
+
+                    <!-- Subheading -->
+                    <p class="text-xl text-gray-300 mb-12 animate-fade-in-up stagger-2">
+                        Top coding classes for children | Learn programming, web development, robotics & more
+                    </p>
+
+                    <!-- CTA Button -->
+                    <a href="/partnership/" class="inline-block px-8 py-4 bg-green-500 text-black rounded-xl font-bold text-lg hover:bg-green-400 transition transform hover:scale-105 active:scale-95 animate-fade-in-up stagger-3 shadow-lg water-effect hover-lift">
+                        GET STARTED
+                    </a>
+                </div>
+
+                <!-- Right side spacing for geometric shapes -->
+                <div class="hidden lg:flex flex-1 relative h-96"></div>
+            </div>
+        </section>
+
+        <!-- Partners section -->
+        <section id="partners" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <p class="text-sm font-semibold uppercase tracking-widest text-emerald-500 mb-2">Our Partners</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-3">Schools & Organisations We Work With</h2>
+                    <p class="text-sm text-gray-600">
+                        We collaborate with schools and organisations that share our vision of empowering African kids with digital skills.
+                    </p>
+                </div>
+
+                {% if partners %}
+                    <div class="relative overflow-hidden">
+                        <div class="flex items-center gap-12 partner-marquee">
+                            {% for partner in partners %}
+                                <div class="flex items-center justify-center w-40 h-20 flex-shrink-0">
+                                    <img src="{{ partner.logo.url }}" alt="{{ partner.name }} logo" class="max-h-16 w-auto object-contain filter grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition" />
+                                </div>
+                            {% endfor %}
+                            {% for partner in partners %}
+                                <div class="flex items-center justify-center w-40 h-20 flex-shrink-0">
+                                    <img src="{{ partner.logo.url }}" alt="{{ partner.name }} logo" class="max-h-16 w-auto object-contain filter grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition" />
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-center text-sm text-gray-500">Partner logos coming soon.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Programs section -->
+        <section id="programs" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <p class="text-sm font-semibold uppercase tracking-widest text-emerald-500 mb-2">Our Programs</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-3">Explore Our Digital Skills Programs</h2>
+                    <p class="text-sm text-gray-600">
+                        Choose from our wide range of tech programs designed to empower African kids with essential digital skills.
+                    </p>
+                </div>
+
+                {% if programs %}
+                    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
+                        {% for program in programs|slice:":3" %}
+                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                                <img src="{{ program.image.url }}" alt="{{ program.title }}" class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ program.title }}</h3>
+                                    <p class="text-sm text-gray-600 mb-4">{{ program.short_description|truncatewords:20 }}</p>
+                                    <div class="flex gap-3">
+                                        {% if program.syllabus %}
+                                            <button onclick="openSyllabusModal('{{ program.title }}', '{{ program.syllabus.url }}')"
+                                                    class="flex-1 px-4 py-2 border-2 border-green-500 text-green-500 rounded-lg hover:bg-green-50 transition font-semibold text-sm">
+                                                View Syllabus
+                                            </button>
+                                        {% endif %}
+                                        <a href="/programs/{{ program.id }}/register/"
+                                           class="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold text-sm text-center">
+                                            Register
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="text-center">
+                        <a href="/programs/" class="inline-block px-8 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition font-semibold">
+                            View All Programs
+                        </a>
+                    </div>
+                {% else %}
+                    <p class="text-center text-sm text-gray-500">Programs coming soon.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Syllabus Modal -->
+        <div id="syllabusModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-gray-900"></h3>
+                    <button onclick="closeSyllabusModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-gray-600 mb-6">Download the program syllabus to learn more about the curriculum and what your child will learn.</p>
+                <a id="downloadLink" href="#" download class="block w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold text-center">
+                    Download Syllabus (PDF)
+                </a>
+            </div>
+        </div>
+
+        <script>
+            function openSyllabusModal(title, url) {
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('downloadLink').href = url;
+                document.getElementById('syllabusModal').classList.remove('hidden');
+            }
+            function closeSyllabusModal() {
+                document.getElementById('syllabusModal').classList.add('hidden');
+            }
+        </script>
+
+        <!-- Testimonials section -->
+        <section id="testimonials" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <p class="text-sm font-semibold uppercase tracking-widest text-emerald-500 mb-2">Testimonials</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-3">What Parents & Schools Are Saying</h2>
+                    <p class="text-sm text-gray-600">
+                        Hear from the parents, students and school leaders who are already experiencing the impact of Virtuakids.
+                    </p>
+                </div>
+
+                {% if testimonials %}
+                    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        {% for testimonial in testimonials %}
+                            <div class="bg-white rounded-2xl shadow-sm p-6 flex flex-col h-full">
+                                <p class="text-sm text-gray-700 mb-4">“{{ testimonial.message }}”</p>
+                                <div class="mt-auto flex items-center gap-3">
+                                    {% if testimonial.image %}
+                                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" class="w-12 h-12 rounded-full object-cover">
+                                    {% else %}
+                                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                                            <span class="text-green-600 font-semibold text-sm">{{ testimonial.name|first }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <div>
+                                        <p class="text-sm font-semibold text-gray-900">{{ testimonial.name }}</p>
+                                        {% if testimonial.role %}
+                                            <p class="text-xs text-gray-500 mt-1">{{ testimonial.role }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-center text-sm text-gray-500">Testimonials coming soon.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-gray-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="flex flex-col md:flex-row justify-between gap-8 border-b border-gray-700 pb-8">
+                    <div class="max-w-md">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="{% static 'imgs/Logo VAR.svg' %}" alt="Virtuakids logo" class="h-10 w-auto">
+                        </div>
+                        <p class="text-sm text-gray-400">
+                            Empowering African kids with digital skills in graphics design, coding, web development, robotics and more.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-sm font-semibold text-white mb-3">Quick Links</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><a href="#" class="hover:text-green-400 transition">Home</a></li>
+                                <li><a href="/about/" class="hover:text-green-400 transition">About Us</a></li>
+                                <li><a href="/programs/" class="hover:text-green-400 transition">Courses</a></li>
+                                <li><a href="/partnership/" class="hover:text-green-400 transition">Partnership</a></li>
+                                <li><a href="/careers/" class="hover:text-green-400 transition">Careers</a></li>
+                                <li><a href="/contact/" class="hover:text-green-400 transition">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white mb-3">Contact</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li>Email: <a href="mailto:virtuakids@gmail.com" class="hover:text-green-400 transition">virtuakids@gmail.com</a></li>
+                                <li>Phone: <a href="tel:+2349072433800" class="hover:text-green-400 transition">+234 907 243 3800</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-between items-center pt-6 text-xs text-gray-500 gap-4">
+                    <p>© 2025 Virtuakids Incorporated. All rights reserved.</p>
+                    <p>Designed Wisteen Technology.</p>
+
+                    <!-- <p>Digital Literacy Skill for the African Child (D.L.A.C).</p> -->
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

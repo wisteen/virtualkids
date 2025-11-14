@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register for {{ program.title }} - Virtuakids{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+{% endblock %}
+
+{% block content %}
+<section class="hero-gradient py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+            Register for <span class="text-green-500">{{ program.title }}</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            {{ program.short_description }}
+        </p>
+    </div>
+</section>
+
+<section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Registration Form</h2>
+            
+            <form id="registrationForm" x-data="registrationForm()" class="space-y-6">
+                {% csrf_token %}
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                        <input type="text" id="first_name" name="first_name" x-model="formData.first_name" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                        <input type="text" id="last_name" name="last_name" x-model="formData.last_name" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                        <input type="email" id="email" name="email" x-model="formData.email" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                        <input type="tel" id="phone" name="phone" x-model="formData.phone" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Mode *</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="mode" value="online" x-model="mode" required class="text-green-500 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-700">Online</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="mode" value="offline" x-model="mode" required class="text-green-500 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-700">Offline</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div x-show="mode === 'offline'" x-transition>
+                    <label for="branch" class="block text-sm font-medium text-gray-700 mb-2">Choose Branch *</label>
+                    <select id="branch" name="branch" x-model="formData.branch" :required="mode === 'offline'"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">Select a branch</option>
+                        {% for branch in branches %}
+                            <option value="{{ branch.id }}">{{ branch.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Duration *</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="duration" value="6weeks" x-model="duration" required class="text-green-500 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-700">6 Weeks</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="duration" value="12weeks" x-model="duration" required class="text-green-500 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-700">12 Weeks</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="participants" class="block text-sm font-medium text-gray-700 mb-2">Number of Participants *</label>
+                    <input type="number" id="participants" name="participants" min="1" value="1" x-model.number="participants" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-600">Price per person:</span>
+                        <span class="text-lg font-semibold text-gray-900" x-text="'₦' + pricePerPerson.toLocaleString()"></span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-600">Participants:</span>
+                        <span class="text-lg font-semibold text-gray-900" x-text="participants"></span>
+                    </div>
+                    <div class="border-t border-gray-300 pt-2 mt-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-900">Total Price:</span>
+                            <span class="text-2xl font-bold text-green-600" x-text="'₦' + totalPrice.toLocaleString()"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" @click="initiatePayment()" :disabled="loading"
+                        class="w-full px-6 py-4 bg-green-500 text-white rounded-lg font-bold text-lg hover:bg-green-600 transition transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span x-show="!loading">Pay ₦<span x-text="totalPrice.toLocaleString()"></span></span>
+                    <span x-show="loading">Processing...</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+    function registrationForm() {
+        return {
+            mode: 'online',
+            duration: '6weeks',
+            participants: 1,
+            loading: false,
+            formData: {
+                first_name: '',
+                last_name: '',
+                email: '',
+                phone: '',
+                branch: ''
+            },
+            prices: {
+                online_6weeks: {{ program.price_online_6weeks }},
+                online_12weeks: {{ program.price_online_12weeks }},
+                offline_6weeks: {{ program.price_offline_6weeks }},
+                offline_12weeks: {{ program.price_offline_12weeks }}
+            },
+            get pricePerPerson() {
+                const key = `${this.mode}_${this.duration}`;
+                return this.prices[key] || 0;
+            },
+            get totalPrice() {
+                return this.pricePerPerson * this.participants;
+            },
+            initiatePayment() {
+                const form = document.getElementById('registrationForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                this.loading = true;
+                const self = this;
+
+                const formData = new FormData();
+                formData.append('first_name', this.formData.first_name);
+                formData.append('last_name', this.formData.last_name);
+                formData.append('email', this.formData.email);
+                formData.append('phone', this.formData.phone);
+                formData.append('mode', this.mode);
+                formData.append('branch', this.formData.branch);
+                formData.append('duration', this.duration);
+                formData.append('participants', this.participants);
+                formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                fetch(window.location.href, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const handler = PaystackPop.setup({
+                        key: '{{ paystack_public_key }}',
+                        email: data.email,
+                        amount: data.amount,
+                        currency: 'NGN',
+                        ref: 'VK' + Math.floor((Math.random() * 1000000000) + 1),
+                        callback: function(response) {
+                            fetch('/verify-payment/', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    reference: response.reference
+                                })
+                            })
+                            .then(res => res.json())
+                            .then(verifyData => {
+                                if (verifyData.status === 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Payment Successful!',
+                                        text: 'Thank you for registering.',
+                                        confirmButtonColor: '#10b981'
+                                    }).then(() => {
+                                        window.location.href = '/programs/';
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Payment Verification Failed',
+                                        text: 'Please contact support.',
+                                        confirmButtonColor: '#10b981'
+                                    });
+                                }
+                            });
+                        },
+                        onClose: function() {
+                            self.loading = false;
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Payment Cancelled',
+                                text: 'You can try again when ready.',
+                                confirmButtonColor: '#10b981'
+                            });
+                        }
+                    });
+
+                    handler.openIframe();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred. Please try again.',
+                        confirmButtonColor: '#10b981'
+                    });
+                    self.loading = false;
+                });
+            }
+        }
+    }
+</script>
+{% endblock %}

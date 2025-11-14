@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Coding School for Kids in Lagos Nigeria | Best Coding Classes for Children | Virtuakids{% endblock %}</title>
+    <meta name="description" content="{% block description %}Best coding school for kids in Lagos, Nigeria. Learn coding, web development, robotics, graphics design. Top coding classes for children ages 6-18. Enroll in our coding academy today!{% endblock %}">
+    <meta name="keywords" content="coding school for kids, coding classes for children, coding academy Lagos, programming school Nigeria, kids coding classes, learn coding for kids, robotics classes Lagos, web development for kids, graphics design school, tech school for children, STEM education Nigeria, coding bootcamp for kids, best coding school Lagos, children programming classes, tech academy Nigeria">
+    <meta name="author" content="Virtuakids Incorporated">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://virtuakids.ng{% block canonical %}{% endblock %}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://virtuakids.ng{% block og_url %}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Best Coding School for Kids in Lagos Nigeria | Virtuakids{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Top coding classes for children. Learn programming, web development, robotics & more. Enroll your child today!{% endblock %}">
+    <meta property="og:image" content="{% static 'imgs/Logomark.svg' %}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://virtuakids.ng{% block twitter_url %}{% endblock %}">
+    <meta property="twitter:title" content="{% block twitter_title %}Best Coding School for Kids Lagos | Virtuakids{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}Premier coding academy for children in Nigeria. Expert instructors, hands-on projects, certificates.{% endblock %}">
+    
+    <link rel="icon" type="image/svg+xml" href="{% static 'imgs/Favicon.svg' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Virtuakids",
+      "description": "Best coding school for kids in Lagos, Nigeria offering coding classes, web development, robotics, and digital skills training for children",
+      "url": "https://virtuakids.ng",
+      "logo": "https://virtuakids.ng{% static 'imgs/Logomark.svg' %}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lagos",
+        "addressCountry": "Nigeria"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+234-907-243-3800",
+        "contactType": "Customer Service",
+        "email": "virtuakids@gmail.com"
+      },
+      "sameAs": [
+        "https://www.facebook.com/share/1Bs8KTxiTn/",
+        "https://wa.me/2349072433800"
+      ]
+    }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float-no-rotate {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .animate-float-image {
+            animation: float-no-rotate 4s ease-in-out infinite;
+        }
+
+        .animate-fade-in-down {
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.3s; }
+        .stagger-3 { animation-delay: 0.5s; }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a1f3a 0%, #0f4d3a 100%);
+        }
+
+        @keyframes partner-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .partner-marquee {
+            animation: partner-scroll 25s linear infinite;
+        }
+
+        @keyframes water-ripple {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7), 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0), 0 0 0 20px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0), 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .water-effect {
+            animation: water-ripple 1.5s infinite;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-gray-50">
+    <div x-data="{ menuOpen: false }">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <div class="flex items-center gap-3 animate-fade-in-down stagger-1">
+                        <a href="/"><img src="{% static 'imgs/Logomark.svg' %}" alt="Virtuakids logo" class="h-10 w-auto"></a>
+                    </div>
+
+                    <nav class="hidden md:flex items-center gap-8">
+                        <a href="/" class="text-gray-700 hover:text-green-500 transition">Home</a>
+                        <a href="/about/" class="text-gray-700 hover:text-green-500 transition">About Us</a>
+                        <a href="/programs/" class="text-gray-700 hover:text-green-500 transition">Courses</a>
+                        <a href="/partnership/" class="text-gray-700 hover:text-green-500 transition">Partners</a>
+                        <a href="/contact/" class="text-gray-700 hover:text-green-500 transition">Contact Us</a>
+                    </nav>
+
+                    <div class="hidden md:flex items-center gap-4 animate-fade-in-down stagger-3">
+                        <a href="/partnership/" class="px-6 py-2 bg-green-500 text-black rounded-lg hover:bg-green-400 transition font-semibold water-effect">
+                            Get Started
+                        </a>
+                    </div>
+
+                    <button @click="menuOpen = !menuOpen" class="md:hidden text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <nav x-show="menuOpen" class="md:hidden pb-4 border-t border-gray-200">
+                    <a href="/" class="block py-2 text-gray-700 hover:text-green-500">Home</a>
+                    <a href="/about/" class="block py-2 text-gray-700 hover:text-green-500">About Us</a>
+                    <a href="/programs/" class="block py-2 text-gray-700 hover:text-green-500">Courses</a>
+                    <a href="/partnership/" class="block py-2 text-gray-700 hover:text-green-500">Partners</a>
+                    <a href="/contact/" class="block py-2 text-gray-700 hover:text-green-500">Contact Us</a>
+                </nav>
+            </div>
+        </header>
+
+        {% block content %}{% endblock %}
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-gray-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="flex flex-col md:flex-row justify-between gap-8 border-b border-gray-700 pb-8">
+                    <div class="max-w-md">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="{% static 'imgs/Logo VAR.svg' %}" alt="Virtuakids logo" class="h-10 w-auto">
+                            
+                        </div>
+                        <p class="text-sm text-gray-400 mb-4">
+                            Empowering African kids with digital skills in graphics design, coding, web development, robotics and more.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://www.facebook.com/share/1Bs8KTxiTn/" target="_blank" class="text-gray-400 hover:text-green-400 transition">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <a href="https://wa.me/2349072433800" target="_blank" class="text-gray-400 hover:text-green-400 transition">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-sm font-semibold text-white mb-3">Quick Links</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><a href="/" class="hover:text-green-400 transition">Home</a></li>
+                                <li><a href="/about/" class="hover:text-green-400 transition">About Us</a></li>
+                                <li><a href="/programs/" class="hover:text-green-400 transition">Courses</a></li>
+                                <li><a href="/partnership/" class="hover:text-green-400 transition">Partnership</a></li>
+                                <li><a href="/careers/" class="hover:text-green-400 transition">Careers</a></li>
+                                <li><a href="/contact/" class="hover:text-green-400 transition">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white mb-3">Contact</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li>Email: <a href="mailto:virtuakids@gmail.com" class="hover:text-green-400 transition">virtuakids@gmail.com</a></li>
+                                <li>Phone: <a href="tel:+2349072433800" class="hover:text-green-400 transition">+234 907 243 3800</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-between items-center pt-6 text-xs text-gray-500 gap-4">
+                    <p>© 2025 Virtuakids Incorporated. All rights reserved.</p>
+                    <p>Designed Wisteen Technology.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

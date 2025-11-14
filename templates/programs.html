@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Programs - Virtuakids{% endblock %}
+
+{% block content %}
+<section class="hero-gradient py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+            Our <span class="text-green-500">Programs</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            Explore all our digital skills programs designed for African kids
+        </p>
+    </div>
+</section>
+
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if programs %}
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {% for program in programs %}
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">{{ program.title }}</h3>
+                            <p class="text-sm text-gray-600 mb-4">{{ program.short_description }}</p>
+                            <div class="flex gap-3">
+                                {% if program.syllabus %}
+                                    <button onclick="openSyllabusModal('{{ program.title }}', '{{ program.syllabus.url }}')"
+                                            class="flex-1 px-4 py-2 border-2 border-green-500 text-green-500 rounded-lg hover:bg-green-50 transition font-semibold text-sm">
+                                        View Syllabus
+                                    </button>
+                                {% endif %}
+                                <a href="/programs/{{ program.id }}/register/"
+                                   class="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold text-sm text-center">
+                                    Register
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-gray-500">No programs available at the moment.</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Syllabus Modal -->
+<div id="syllabusModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-8">
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="modalTitle" class="text-2xl font-bold text-gray-900"></h3>
+            <button onclick="closeSyllabusModal()" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <p class="text-gray-600 mb-6">Download the program syllabus to learn more about the curriculum.</p>
+        <a id="downloadLink" href="#" download class="block w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold text-center">
+            Download Syllabus (PDF)
+        </a>
+    </div>
+</div>
+
+<script>
+    function openSyllabusModal(title, url) {
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('downloadLink').href = url;
+        document.getElementById('syllabusModal').classList.remove('hidden');
+    }
+    function closeSyllabusModal() {
+        document.getElementById('syllabusModal').classList.add('hidden');
+    }
+</script>
+{% endblock %}
